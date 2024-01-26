@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:practice_flutter_project/ui/tapable_button.dart';
+import 'package:astralbooking/ui/tapable_button.dart';
 
 class IntroPage extends StatelessWidget {
   const IntroPage({super.key});

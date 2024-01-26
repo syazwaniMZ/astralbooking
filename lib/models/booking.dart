@@ -1,14 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:practice_flutter_project/models/bus.dart';
+import 'package:astralbooking/models/bus.dart';
 
 class Booking {
-  Route route;
+  int routeID;
   int reservation_id;
   int departure_id;
   DateTime date;
-  Bus busID;
+  int trainNum;
   int coachID;
   int seatNo;
+  double fee;
 
-  Booking(this.route,this.reservation_id, this.date, this.departure_id, this.busID, this.coachID, this.seatNo);
+  Booking(this.routeID,this.reservation_id, this.departure_id, this.date , this.trainNum, this.coachID, this.seatNo, this.fee);
 }

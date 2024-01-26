@@ -1,5 +1,5 @@
 import "package:flutter/material.dart";
-import 'package:practice_flutter_project/widgets/menu_drawer.dart';
+import 'package:astralbooking/widgets/menu_drawer.dart';
 
 class ConfirmBooking extends StatelessWidget {
   const ConfirmBooking({super.key});

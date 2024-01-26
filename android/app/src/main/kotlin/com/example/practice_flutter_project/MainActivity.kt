@@ -1,4 +1,4 @@
-package com.example.practice_flutter_project
+package com.example.astralbooking
 
 import io.flutter.embedding.android.FlutterActivity
 

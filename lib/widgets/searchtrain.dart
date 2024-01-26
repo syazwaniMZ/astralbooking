@@ -2,8 +2,9 @@ import 'dart:core';
 
 import "package:flutter/material.dart";
 import 'package:intl/intl.dart';
-import 'package:practice_flutter_project/models/trainSearchData.dart';
-import 'package:practice_flutter_project/ui/tapable_button.dart';
+import 'package:astralbooking/models/trainSearchData.dart';
+import 'package:astralbooking/ui/tapable_button.dart';
+import '../pages/select_train_page.dart';
 import '/ui/roundedRectangle.dart';
 
 class SearchTrain extends StatefulWidget {
@@ -19,17 +20,17 @@ class _SearchTrainState extends State<SearchTrain> {
 
   late String _origin='';
   late String _destination='';
-  late final int _pax =1;
+  late int _pax =1;
   late DateTime _departure = DateTime.now();
-  late DateTime? _returnTime = null;
+  DateTime? _returnTime;
   
   DateTime selectedDate = DateTime.now();
 
-  final TextEditingController _dateController = TextEditingController();
+  final TextEditingController _textController = TextEditingController(text: '1');
 
   late DateFormat dateFormat = DateFormat("yMMMd");
 
-  Future<void> _selectDate(BuildContext context, bool isReturnTrip) async {
+  void _selectDate(BuildContext context, bool isReturnTrip) async {
     final DateTime? picked = await showDatePicker(
     context: context,
     initialDate: selectedDate,
@@ -53,10 +54,6 @@ class _SearchTrainState extends State<SearchTrain> {
       });
     }
   }
-
-void _clearReturningDate(){
-  _returnTime = null;
-}
 
 
 String? DateTimeNullChecker(DateTime? date)
@@ -128,43 +125,64 @@ String? DateTimeNullChecker(DateTime? date)
 
             RoundedRect(
               child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children:[
                   MaterialButton(
                     onPressed: () {
                       _selectDate(context, true);
                     },
                     child: SizedBox(
-                      width: 200,
+                      width: 150,
                       child: Text('Departure Time: ${DateTimeNullChecker(_returnTime)}'),
                     ),
                   ),
 
-                  TapableButton(
-                    onTap: (){
-                       _clearReturningDate();}, 
-                    child: const Icon(Icons.close))
+                  MaterialButton(
+                    onPressed: () {
+                      setState(() {
+                        _returnTime = null;
+                      });
+                    },
+                    child: const Icon(Icons.close)
+                  ),
+                  
                 ]
               )
             ),
 
             RoundedRect(
               child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                //mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Padding(
-                    padding: const EdgeInsets.only(left: 20.0),
-                    child:Text('No. Passengers:  ${_pax.toString()}')),
 
-                  TapableButton(
-                    onTap: (){},
-                    child: Icon(Icons.edit),
+                  const SizedBox(
+                    width: 100,
+                    child:Text('No. Passengers:')
+                  ),
+                  
+                  SizedBox(
+                    width: 20,
+                    child: TextField(
+                      controller: _textController,
+                      onSubmitted:(value) {
+                        setState(() {
+                          _pax = int.parse(value);
+                        });
+                      },
                     )
+                  ),
 
-                ],
-              
+                  Icon(Icons.edit)
+                ],      
               )
-            )
-            
+            ),
+
+            TapableButton(
+              onTap: (){
+                SearchData searchData = new SearchData(_origin, _destination, _departure, _returnTime, _pax);
+                Navigator.push(context, MaterialPageRoute(builder: (context) => SelectTrain(searchData)));
+              },
+              child: Text('Search Trains'))
           ],
         ),
       )

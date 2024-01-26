@@ -1,7 +1,7 @@
 import "package:flutter/material.dart";
-import 'package:practice_flutter_project/widgets/menu_drawer.dart';
-import 'package:practice_flutter_project/ui/roundedcontainer.dart';
-import 'package:practice_flutter_project/widgets/searchtrain.dart';
+import 'package:astralbooking/widgets/menu_drawer.dart';
+import 'package:astralbooking/ui/roundedcontainer.dart';
+import 'package:astralbooking/widgets/searchtrain.dart';
 
 class TrainSearchPage extends StatelessWidget {
   const TrainSearchPage({super.key});

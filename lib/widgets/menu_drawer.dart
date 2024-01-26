@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:practice_flutter_project/ui/list_tile_component.dart';
+import 'package:astralbooking/ui/list_tile_component.dart';
 
 class  MenuDrawer extends StatelessWidget{
   const MenuDrawer({super.key});

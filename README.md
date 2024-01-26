@@ -1,4 +1,4 @@
-# practice_flutter_project
+# astralbooking
 
 A new Flutter project.
 

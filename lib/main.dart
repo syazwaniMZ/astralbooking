@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:practice_flutter_project/themes/light_mode.dart';
+import 'package:astralbooking/themes/light_mode.dart';
 
 import 'pages/intro_page.dart';
 import 'pages/train_search_page.dart';
