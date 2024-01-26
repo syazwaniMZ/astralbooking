@@ -14,7 +14,7 @@ class _DisplayTrainOptionState extends State<DisplayTrainOption> {
       builder: (context, constraints){
         return SingleChildScrollView(
           child: Placeholder(),
-        )
+        );
       }
     );
   }

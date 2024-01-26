@@ -2,7 +2,7 @@ import 'dart:core';
 
 import "package:flutter/material.dart";
 import 'package:intl/intl.dart';
-import 'package:astralbooking/models/trainSearchData.dart';
+import 'package:astralbooking/models/train_search_data.dart';
 import 'package:astralbooking/ui/tapable_button.dart';
 import '../pages/select_train_page.dart';
 import '/ui/roundedRectangle.dart';
@@ -179,8 +179,8 @@ String? DateTimeNullChecker(DateTime? date)
 
             TapableButton(
               onTap: (){
-                SearchData searchData = new SearchData(_origin, _destination, _departure, _returnTime, _pax);
-                Navigator.push(context, MaterialPageRoute(builder: (context) => SelectTrain(searchData)));
+                SearchData data = SearchData(_origin, _destination, _departure, _returnTime, _pax);
+                Navigator.push(context, MaterialPageRoute(builder: (context) => SelectTrain(data: data,)));
               },
               child: Text('Search Trains'))
           ],

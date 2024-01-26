@@ -1,4 +1,4 @@
-import 'package:astralbooking/models/trainSearchData.dart';
+import 'package:astralbooking/models/train_search_data.dart';
 import 'package:flutter/material.dart';
 
 /// The base class for the different types of items the list can contain.
@@ -11,10 +11,10 @@ abstract class ListItem {
 }
 
 class SelectTrain extends StatelessWidget {
-  const SelectTrain(SearchData searchData, {super.key, required this.items});
+  const SelectTrain({super.key, required this.data});
 
 
-  final SearchData items;
+  final SearchData data;
 
   @override
   Widget build(BuildContext context) {
@@ -26,15 +26,15 @@ class SelectTrain extends StatelessWidget {
         )
   );  
 
-    return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Colors.transparent,
-        elevation: 0,
-        foregroundColor: Theme.of(context).colorScheme.inversePrimary,
-        title: Row(
+  return Scaffold(
+    appBar: AppBar(
+      backgroundColor: Colors.transparent,
+      elevation: 0,
+      foregroundColor: Theme.of(context).colorScheme.inversePrimary,
+        title: const Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            const Text("Milky Way to Whirpool"), //Placeholderr
+            Text("Milky Way to Whirpool"), //Placeholderr
             Text("28 JAN")
           ],
         ),

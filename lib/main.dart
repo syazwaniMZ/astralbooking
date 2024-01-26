@@ -3,7 +3,7 @@ import 'package:astralbooking/themes/light_mode.dart';
 
 import 'pages/intro_page.dart';
 import 'pages/train_search_page.dart';
-import 'pages/confirm_booking.dart';
+import 'pages/confirm_booking_page.dart';
 import 'pages/booking_train_page.dart';
 
 void main() {
@@ -25,7 +25,7 @@ class MyApp extends StatelessWidget {
         '/intro_page':(context) => const IntroPage(),
         '/train_search_page': (context) => const TrainSearchPage(),
         '/booking_train_page': (context) => const BookingTrain(),
-        '/confirm_booking': (context) => const ConfirmBooking(),
+        '/confirm_booking_page': (context) => const ConfirmBooking(),
       },
 
     );
