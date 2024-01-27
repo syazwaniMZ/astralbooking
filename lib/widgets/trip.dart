@@ -1,6 +1,7 @@
 import 'package:astralbooking/models/session_data.dart';
 
 class Trip {
+  late bool isReturnTrip;
   late DateTime bookingDate;
   String pointA = 'A', pointB = 'B';
   
@@ -16,5 +17,6 @@ class Trip {
       pointA = data.origin;
       pointB = data.destination;
     }
+    isReturnTrip = isReturning;
   }
 }

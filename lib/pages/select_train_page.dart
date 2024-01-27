@@ -1,7 +1,6 @@
 import 'package:astralbooking/models/session_data.dart';
 import 'package:astralbooking/widgets/trip.dart';
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
 import 'package:astralbooking/widgets/generate_time_interval.dart';
 
 import '../const.dart';
@@ -19,30 +18,30 @@ class SelectTrain extends StatelessWidget {
   Widget build(BuildContext context) {
 
     Trip trip = Trip(isReturnTrip, data);
+    DateTime arrivalTime;
   
-
     final List<DateTime> departureTimes = generateTimeIntervals(
     dateFormat.format(trip.bookingDate),"10:00", "17:00");
 
+    List<String> trainList = List<String>.generate(departureTimes.length, (index) => "");
+
     //Function to generate train number
     final List<Widget> widget = List.generate(departureTimes.length,(index) {
-      String trainNo;
       IconData icon;
       
-
-      DateTime arrivalTime = departureTimes[index].add(const Duration(hours: 3, minutes: 20));
+      arrivalTime = departureTimes[index].add(const Duration(hours: 3, minutes: 20));
 
       switch (index % 3) {
         case  0 :
-          trainNo = "0420";
+          trainList[index] = "0420";
           icon = Icons.train_outlined;
           break;
         case  1 :
-          trainNo = "3033";
+          trainList[index] = "3033";
           icon = Icons.train;
           break;
         default :
-          trainNo = "9898";
+          trainList[index] = "9898";
           icon = Icons.directions_train;
           break;
       }
@@ -61,7 +60,7 @@ class SelectTrain extends StatelessWidget {
                       children: [
                         Text('Departure Time: ${hourminutesFormat.format(departureTimes[index])}'),
                         Text('Expected Arrival Time: ${hourminutesFormat.format(arrivalTime)}'),
-                        Text('Train No. $trainNo')
+                        Text('Train No. ${trainList[index]}')
                       ],
                   ),
                 ),
@@ -71,17 +70,13 @@ class SelectTrain extends StatelessWidget {
                 padding: const EdgeInsets.all(20),
                 child: TapableButton(
                   onTap: (){
-                    String tempDate = dateFormat.format(trip.bookingDate) + hourminutesFormat.format(departureTimes[index]);
+                    String tempDate = '${dateFormat.format(trip.bookingDate)} ${hourminutesFormat.format(departureTimes[index])}';
                     trip.bookingDate = DateTime.parse(tempDate);
-                    if (isReturnTrip) {
-                      data.returningTime = trip.bookingDate;
-                    } else {
-                      data.departureTime = trip.bookingDate;
-                    }
 
-
-                    print('Booking date: ${trip.bookingDate}');
-                    Navigator.push(context, MaterialPageRoute(builder: (context) => SelectCoachPage(data: data,)));
+                    assignTripInfo(trip, arrivalTime, trainList[index]);
+                    
+                    print('Booking date: ${trip.bookingDate} and ${data.departTrainNo}');
+                    Navigator.push(context, MaterialPageRoute(builder: (context) => SelectCoachPage(data: data, trip: trip)));
                   },
                   child: const Icon(Icons.navigate_next_rounded)
                 )
@@ -119,17 +114,27 @@ class SelectTrain extends StatelessWidget {
       body: LayoutBuilder(builder: (context, constraints){
         return SingleChildScrollView(
           child: ConstrainedBox(
-            constraints: BoxConstraints(
-              minHeight: constraints.maxHeight),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: widget
-                )
+            constraints: BoxConstraints(minHeight: constraints.maxHeight),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: widget
             )
-          );
-        }
-      )
+          )
+        );
+      })
     );
+  }
+
+  void assignTripInfo(Trip trip, DateTime arrivalTime, String trainNo) {
+    if (isReturnTrip) {
+      data.returningTime = trip.bookingDate;
+      data.returningArrivalTime = data.returningTime;
+      data.returnTrainNo = trainNo;
+    } else {
+      data.departureTime = trip.bookingDate;
+      data.departureArrivalTime = arrivalTime;
+      data.departTrainNo = trainNo;
+    }
   }
 }
 

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:astralbooking/themes/light_mode.dart';
 
 import 'pages/intro_page.dart';
+import 'pages/select_train_page.dart';
 import 'pages/train_search_page.dart';
 import 'pages/confirm_booking_page.dart';
 import 'pages/booking_train_page.dart';
