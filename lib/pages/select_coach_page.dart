@@ -1,4 +1,5 @@
-import 'package:astralbooking/ui/coach_shape.dart';
+import 'package:astralbooking/pages/select_seat_page.dart';
+import 'package:astralbooking/widgets/coach_shape.dart';
 import 'package:flutter/material.dart';
 
 import '../const.dart';
@@ -29,7 +30,9 @@ class SelectCoachPage extends StatelessWidget {
           }
 
           print("${alphabets[index]} and Departing Coach ID: ${data.departCoachID}");
-          //Navigator.push(context, MaterialPageRoute());
+          
+          Navigator.push(context, MaterialPageRoute(builder: (context) => SelectSeatPage(data: data, trip: trip)));
+
           },
         );
     });

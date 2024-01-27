@@ -57,14 +57,14 @@ class _SearchTrainState extends State<SearchTrain> {
   }
 
 
-String? DateTimeNullChecker(DateTime? date)
-{
-  if (date == null) {
-    return "";
-  } else {
-    return dateFormat.format(date);
+  String? DateTimeNullChecker(DateTime? date) {
+    if (date == null) {
+      return "";
+    } else {
+      return dateFormat.format(date);
+    }
   }
-}
+  
 
    
   @override
