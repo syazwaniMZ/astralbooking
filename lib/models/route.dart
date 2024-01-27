@@ -1,8 +1,8 @@
 import 'location.dart';
 
 class Route{
-  late Location origin;
-  late Location destination;
+  late String origin;
+  late String destination;
   late double fee;
   late int routeID;
   late DateTime arrivalTime;

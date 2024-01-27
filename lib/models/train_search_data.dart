@@ -1,11 +1,9 @@
  class SearchData {
-  late String _origin;
-  late String _destination;
-  late DateTime _departure;
-  late DateTime? _returnTime;
-  late int _pax;
+  late final String origin;
+  late final String destination;
+  late final DateTime departure;
+  late final DateTime? returnTime;
+  late final int pax;
 
-  SearchData(this._origin, this._destination, this._departure, this._returnTime, this._pax);
-
-
+  SearchData(this.origin, this.destination, this.departure, this.returnTime, this.pax);
  }

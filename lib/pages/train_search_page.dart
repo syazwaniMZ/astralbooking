@@ -23,7 +23,11 @@ class TrainSearchPage extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          Expanded(child:RoundedContainer(child: SearchTrain())),
+          Expanded(
+            child:RoundedContainer(
+              child: SearchTrain()
+            )
+          ),
         ],
       ),
     );

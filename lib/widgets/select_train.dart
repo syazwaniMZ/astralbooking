@@ -12,7 +12,7 @@ class _DisplayTrainOptionState extends State<DisplayTrainOption> {
   Widget build(BuildContext context) {
     return LayoutBuilder(
       builder: (context, constraints){
-        return SingleChildScrollView(
+        return const SingleChildScrollView(
           child: Placeholder(),
         );
       }

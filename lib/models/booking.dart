@@ -1,12 +1,12 @@
 class Booking {
-  int routeID;
   int reservationID;
-  int departureID;
+  int routeID;
   DateTime date;
+  DateTime arrival;
   int trainNum;
   int coachID;
-  int seatNo;
+  List<String> seatNo;
   double fee;
-
-  Booking(this.routeID,this.reservationID, this.departureID, this.date , this.trainNum, this.coachID, this.seatNo, this.fee);
+  String email;
+  Booking(this.reservationID, this.routeID, this.date , this.arrival, this.trainNum, this.coachID, this.seatNo, this.fee, this.email);
 }
