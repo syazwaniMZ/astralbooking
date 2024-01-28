@@ -56,3 +56,11 @@ node_modules
 
 # Ignore SASS config files
 .sass-cache
+
+*.exe
+
+google-services.json
+firebase_app_id_file.json
+GoogleService-Info.plist
+firebase_options.dart
+firebase_app_id_file.json
