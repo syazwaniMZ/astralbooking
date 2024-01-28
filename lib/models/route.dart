@@ -1,4 +1,3 @@
-import 'location.dart';
 
 class Route{
   late String origin;

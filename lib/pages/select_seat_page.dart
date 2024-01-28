@@ -1,8 +1,7 @@
+import 'package:astralbooking/widgets/seats.dart';
 import 'package:flutter/material.dart';
 
-import '../const.dart';
 import '../models/session_data.dart';
-import '../widgets/select_seat.dart';
 import '../widgets/trip.dart';
 
 class SelectSeatPage extends StatelessWidget {
@@ -13,25 +12,6 @@ class SelectSeatPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
 
-    // final List<Widget> coachWidget = List.generate(coachMAX, (index){
-    //   return CoachShape(
-    //     coachID: alphabets[index],
-    //     i: index,
-    //     onTapCoach: (){
-          
-    //       if (trip.isReturnTrip){
-    //         data.returnCoachID = alphabets[index];
-    //       }
-    //       else {
-    //         data.departCoachID = alphabets[index];
-    //       }
-
-    //       print("${alphabets[index]} and Departing Coach ID: ${data.departCoachID}");
-    //       //Navigator.push(context, MaterialPageRoute());
-    //       },
-    //     );
-    // });
-    
     return Scaffold(
       appBar: AppBar(
         toolbarHeight: 100,
@@ -54,8 +34,9 @@ class SelectSeatPage extends StatelessWidget {
           ),
         ),
 
-        body: SeatWidget(data: data, trip: trip)
-    );
+      body: SeatWidget(data: data,trip: trip,)
+    
+      );
 
   }
 }
