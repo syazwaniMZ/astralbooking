@@ -64,3 +64,10 @@ firebase_app_id_file.json
 GoogleService-Info.plist
 firebase_options.dart
 firebase_app_id_file.json
+.flutter-plugins
+.rules
+.rules.json
+firebase.json
+firestore.rules
+.firebaserc
+firebase-hosting-pull-request.yml
