@@ -1,16 +1,17 @@
 import 'package:astralbooking/pages/select_seat_page.dart';
+import 'package:astralbooking/ui/trip_appbar.dart';
 import 'package:astralbooking/widgets/coach_shape.dart';
 import 'package:flutter/material.dart';
 
 import '../const.dart';
 import '../models/session_data.dart';
-import '../widgets/trip.dart';
+import '../models/trip.dart';
 
+// ignore: must_be_immutable
 class SelectCoachPage extends StatelessWidget {
-  const SelectCoachPage({super.key, required this.data, required this.trip});
-  final Trip trip;
-  final SessionData data;
-
+  SelectCoachPage({super.key, required this.data, required this.trip});
+  Trip trip;
+  SessionData data;
   @override
   Widget build(BuildContext context) {
 
@@ -20,6 +21,7 @@ class SelectCoachPage extends StatelessWidget {
       return CoachShape(
         coachID: alphabets[index],
         i: index,
+
         onTapCoach: (){
           
           if (trip.isReturnTrip){
@@ -29,7 +31,7 @@ class SelectCoachPage extends StatelessWidget {
             data.departCoachID = alphabets[index];
           }
 
-          print("${alphabets[index]} and Departing Coach ID: ${data.departCoachID}");
+          //print("Departing Coach ID: ${alphabets[index]}");
           
           Navigator.push(context, MaterialPageRoute(builder: (context) => SelectSeatPage(data: data, trip: trip)));
 
@@ -37,29 +39,12 @@ class SelectCoachPage extends StatelessWidget {
         );
     });
     
-    return Scaffold(
-      appBar: AppBar(
-        toolbarHeight: 100,
-        backgroundColor: Colors.transparent,
-        elevation: 0,
-        foregroundColor: Theme.of(context).colorScheme.inversePrimary,
-          title: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              SizedBox(
-                width: 200,
-                child: Text("${trip.pointA} to ${trip.pointB}"),
-              ),
+    return TripScaffold(
+      heading: "${trip.pointA} to ${trip.pointB}",
+      subtitle: "${trip.currently()} - Select Coach",
+      cornerText: "",
 
-              const SizedBox(
-                width: 70,
-                child: Text("Select coach"),
-              )
-            ],
-          ),
-        ),
-
-        body: LayoutBuilder(builder: (context, constraints){
+      body: LayoutBuilder(builder: (context, constraints){
           return SingleChildScrollView(
             child: ConstrainedBox(
               constraints: BoxConstraints( minHeight: constraints.maxHeight),
@@ -71,6 +56,7 @@ class SelectCoachPage extends StatelessWidget {
             
           );
         })
+
     );
 
   }

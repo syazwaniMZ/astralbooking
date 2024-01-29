@@ -62,5 +62,5 @@ BorderRadius coachBorder = const BorderRadius.all(Radius.circular(10));
 EdgeInsets coachMargin = const EdgeInsets.all(10.0);
 
 TextStyle bold20 = const TextStyle(
-  fontSize: 20,
+  fontSize: 18,
   fontWeight: FontWeight.bold);

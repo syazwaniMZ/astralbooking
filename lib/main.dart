@@ -1,12 +1,19 @@
+import 'package:astralbooking/pages/login_page.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'firebase_options.dart';
+
+
 import 'package:flutter/material.dart';
 import 'package:astralbooking/themes/light_mode.dart';
 
 import 'pages/intro_page.dart';
-import 'pages/train_search_page.dart';
-import 'pages/confirm_booking_page.dart';
-import 'pages/booking_train_page.dart';
 
-void main() {
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform
+  );
+
   runApp(const MyApp());
 }
 
@@ -24,9 +31,7 @@ class MyApp extends StatelessWidget {
       home: const IntroPage(),
       routes: {
         '/intro_page':(context) => const IntroPage(),
-        '/train_search_page': (context) => const TrainSearchPage(),
-        '/booking_train_page': (context) => const BookingTrain(),
-        '/confirm_booking_page': (context) => const ConfirmBooking(),
+        '/login_page':(context) => const LoginPage(),
       },
 
     );

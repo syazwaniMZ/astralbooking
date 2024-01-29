@@ -8,6 +8,10 @@ class RoundedRect extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
+        boxShadow: const [BoxShadow(
+          color: Colors.black26,
+          offset: Offset( 5.0, 5.0,)
+        )],
         color: Theme.of(context).colorScheme.primary,
         borderRadius: BorderRadius.circular(12),
       ),

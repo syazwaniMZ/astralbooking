@@ -1,5 +1,6 @@
 import 'package:astralbooking/models/session_data.dart';
-import 'package:astralbooking/widgets/trip.dart';
+import 'package:astralbooking/models/trip.dart';
+import 'package:astralbooking/ui/trip_appbar.dart';
 import 'package:flutter/material.dart';
 import 'package:astralbooking/widgets/generate_time_interval.dart';
 
@@ -7,25 +8,26 @@ import '../const.dart';
 import '../ui/tapable_button.dart';
 import 'select_coach_page.dart';
 
+// ignore: must_be_immutable
 class SelectTrain extends StatelessWidget {
-  const SelectTrain({super.key, required this.data, required this.isReturnTrip});
-
-  final bool isReturnTrip; //To check whether this widget is to book for returning trip
-  final SessionData data;
+  SelectTrain({super.key, required this.data, required bool isReturnTrip, required this.trip}) : _isReturnTrip = isReturnTrip;
+  final bool _isReturnTrip; //To check whether this widget is to book for returning trip
+  SessionData data;
+  Trip trip;
   
 
   @override
   Widget build(BuildContext context) {
-
-    Trip trip = Trip(isReturnTrip, data);
+    
     DateTime arrivalTime;
   
+    //Hard coded the train schedule
     final List<DateTime> departureTimes = generateTimeIntervals(
     dateFormat.format(trip.bookingDate),"10:00", "17:00");
 
     List<String> trainList = List<String>.generate(departureTimes.length, (index) => "");
 
-    //Function to generate train number
+    //TO DO: REFACTOR THIS LARGE LIST GENERATE (IT'S TOO BIG)
     final List<Widget> widget = List.generate(departureTimes.length,(index) {
       IconData icon;
       
@@ -72,11 +74,12 @@ class SelectTrain extends StatelessWidget {
                   onTap: (){
                     String tempDate = '${dateFormat.format(trip.bookingDate)} ${hourminutesFormat.format(departureTimes[index])}';
                     trip.bookingDate = DateTime.parse(tempDate);
+                    
 
                     assignTripInfo(trip, arrivalTime, trainList[index]);
                     
-                    print('Booking date: ${trip.bookingDate} and ${data.departTrainNo}');
-                    Navigator.push(context, MaterialPageRoute(builder: (context) => SelectCoachPage(data: data, trip: trip)));
+                    print('Booking date: ${trip.bookingDate} and ${trainList[index]}');
+                    Navigator.push(context, MaterialPageRoute(builder: (context) => SelectCoachPage(data: data, trip: trip,)));
                   },
                   child: const Icon(Icons.navigate_next_rounded)
                 )
@@ -87,29 +90,10 @@ class SelectTrain extends StatelessWidget {
       );
     });
 
-    return Scaffold(
-      appBar: AppBar(
-        toolbarHeight: 100,
-        backgroundColor: Colors.transparent,
-        elevation: 0,
-        foregroundColor: Theme.of(context).colorScheme.inversePrimary,
-          title: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              SizedBox(
-                width: 200,
-                child: Text("${trip.pointA} to ${trip.pointB}"),
-              ),
-
-              SizedBox(
-                width: 70,
-                child: Text(
-                  barDateFormat.format(trip.bookingDate),
-                  ),
-              )
-            ],
-          ),
-        ),
+    return TripScaffold(
+      heading: "${trip.currently()} - Select time",
+      subtitle: "${trip.pointA} to ${trip.pointB}",
+      cornerText: "",
 
       body: LayoutBuilder(builder: (context, constraints){
         return SingleChildScrollView(
@@ -126,7 +110,7 @@ class SelectTrain extends StatelessWidget {
   }
 
   void assignTripInfo(Trip trip, DateTime arrivalTime, String trainNo) {
-    if (isReturnTrip) {
+    if (_isReturnTrip) {
       data.returningTime = trip.bookingDate;
       data.returningArrivalTime = data.returningTime;
       data.returnTrainNo = trainNo;

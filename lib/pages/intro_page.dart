@@ -42,7 +42,7 @@ class IntroPage extends StatelessWidget {
             const SizedBox(height: 20,),
 
             TapableButton(
-              onTap: () => Navigator.pushNamed(context, '/train_search_page'),
+              onTap: () => Navigator.pushNamed(context, '/login_page'),
               child: const Icon(Icons.arrow_forward))
           ],
         ),
